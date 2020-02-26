@@ -4,6 +4,7 @@
 #include <conio.h>
 #include <clocale>
 #include <cstring>
+#include <ctime>
 
 using namespace std;
 
@@ -17,7 +18,6 @@ struct Arr {
 };
 
 
-void qs(char *items, int left, int right);
 
 int main() {
 
@@ -48,15 +48,13 @@ int main() {
     }
 
 
-//======================================================================================
-    /*char str[] = "321321321654654";
-    int len = strlen(str);
-    cout << "Array unsorted  " << str << endl;
+    std::vector<Arr> data;
+    qs(data, 0, (int)(data.size() - 1));
 
-    qs(str, 0, len - 1);
-    cout << "Array sorted  " << str;
+   
+    
     _getch();*/
-//======================================================================================
+
     otp << N << std::endl;
     for (const auto& d : data)
         otp << d.first << " " << d.second << std::endl;
@@ -65,26 +63,24 @@ int main() {
 
 }
 
-void qs(struct *items.num, int left, int right) {
-    int i, j;
-    char x, y;
+void qs(std::vector<Arr>& items, int left, int right) {
+   
 
-    i = left; j = right;
-    x = items.num[(left + right) / 2];
+   int i = left; 
+   int j = right;
+   int x = items[(left + right) / 2].num;
 
     do {
-        while ((items.num[i] < x) && (i < right)) i++;
-        while ((x < items.num[j]) && (j > left)) j--;
+        while ((items[i].num < x) && (i < right)) i++;
+        while ((x < items[j].num) && (j > left)) j--;
         if (i <= j) {
 
-            y = items.num[i];
-            items.num[i] = items.num[j];
-            items.num[j] = y;
+            std::swap(items[i].num, items[j].num);
             i++;
             j--;
         }
     } while (i <= j);
-    if (left < j) qs(items.num, left, j);
-    if (i < right) qs(items.num, i, right);
+    if (left < j) qs(items, left, j);
+    if (i < right) qs(items, i, right);
 
 };
