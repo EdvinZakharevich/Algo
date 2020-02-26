@@ -7,44 +7,84 @@
 
 using namespace std;
 
+struct Arr {
+    int id;
+    int num;
+    string key;
+    Arr(int i, int n, string k): id(i), num(n), key(k){}
+
+
+};
+
+
 void qs(char *items, int left, int right);
 
 int main() {
 
     setlocale(LC_ALL, "Russian");
 
-    char str[] = "321321321654654";
+ //=====================================================================================
+
+    std::ifstream inp(/* тут имя файла из командной строки */);
+    std::ofstream otp(/* тут имя второго файла из командной строки */);
+
+    int N = 0;
+    inp >> N;
+    if (N < 0)
+        return 3;
+
+    std::vector < std::pair<int, std::string >> data;
+    data.reserve(N);
+
+    for (int i = 0; i < N; ++i)
+    {
+        int k = 0;
+        inp >> k;
+
+        std::string v;
+        inp >> v; /* тут может другая функция нужна - прочитать всю текущую строку до конца */
+
+        data.emplace_back(k, std::move(v));
+    }
+
+
+//======================================================================================
+    /*char str[] = "321321321654654";
     int len = strlen(str);
     cout << "Array unsorted  " << str << endl;
 
     qs(str, 0, len - 1);
     cout << "Array sorted  " << str;
-    _getch();
-    
+    _getch();*/
+//======================================================================================
+    otp << N << std::endl;
+    for (const auto& d : data)
+        otp << d.first << " " << d.second << std::endl;
+
     return 0;
 
 }
 
-void qs(char *items, int left, int right) {
+void qs(struct *items.num, int left, int right) {
     int i, j;
     char x, y;
 
     i = left; j = right;
-    x = items[(left + right) / 2];
+    x = items.num[(left + right) / 2];
 
     do {
-        while ((items[i] < x) && (i < right)) i++;
-        while ((x < items[j]) && (j > left)) j--;
+        while ((items.num[i] < x) && (i < right)) i++;
+        while ((x < items.num[j]) && (j > left)) j--;
         if (i <= j) {
 
-            y = items[i];
-            items[i] = items[j];
-            items[j] = y;
+            y = items.num[i];
+            items.num[i] = items.num[j];
+            items.num[j] = y;
             i++;
             j--;
         }
     } while (i <= j);
-    if (left < j) qs(items, left, j);
-    if (i < right) qs(items, i, right);
+    if (left < j) qs(items.num, left, j);
+    if (i < right) qs(items.num, i, right);
 
 };
